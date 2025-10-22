@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package poker.rpc;
+
+option java_package = "ru.reddmix.DualBase.proto";
+option java_outer_classname = "DatabaseProtos";
+
+// Определение сервиса для работы с базой данных
+service DatabaseService {
+    // Метод для получения списка игр
+    rpc FetchAllGames(FetchRequest) returns (FetchReply) {}
+}
+
+// Запрос на получение игр
+message FetchRequest {
+    bool usePostgres = 1; // Источник данных: true для PostgreSQL, false для ClickHouse
+}
+
+// Ответ на запрос с набором игр
+message FetchReply {
+    repeated Game games = 1; // Список игр
+}
+
+// Сообщение, представляющее одну игру
+message Game {
+    int64 player_id = 1;    // Идентификатор игрока
+    float bet_amount = 2;   // Сумма ставки
+    float win_amount = 3;   // Сумма выигрыша
+}
