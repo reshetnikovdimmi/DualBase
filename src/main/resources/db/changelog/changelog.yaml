@@ -1,0 +1,45 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-user-tables
+      author: admin
+      preConditions:
+        onFail: MARK_RAN
+      changes:
+        - createTable:
+            tableName: users
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT AUTO_INCREMENT PRIMARY KEY
+              - column:
+                  name: username
+                  type: VARCHAR(50)
+              - column:
+                  name: balance
+                  type: DECIMAL(10,2)
+              - column:
+                  name: email
+                  type: VARCHAR(100)
+
+  - changeSet:
+      id: create-games-tables
+      author: admin
+      changes:
+        - createTable:
+            tableName: games
+            columns:
+              - column:
+                  name: id
+                  type: BIGSERIAL PRIMARY KEY
+              - column:
+                  name: player_id
+                  type: BIGINT REFERENCES users(id)
+              - column:
+                  name: game_date
+                  type: TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW()
+              - column:
+                  name: bet_amount
+                  type: DECIMAL(10,2)
+              - column:
+                  name: win_amount
+                  type: DECIMAL(10,2)

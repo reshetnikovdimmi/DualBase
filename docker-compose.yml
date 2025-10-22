@@ -1,0 +1,30 @@
+version: '3'
+services:
+  postgres:
+    image: postgres:latest
+    container_name: poker_postgres
+    environment:
+      POSTGRES_USER: poker_user
+      POSTGRES_PASSWORD: secret
+      POSTGRES_DB: poker_game_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./data:/var/lib/postgresql/data
+    networks:
+      - backend-network
+
+  clickhouse:
+    image: yandex/clickhouse-server:latest
+    container_name: poker_clickhouse
+    environment:
+      CLICKHOUSE_USER: default
+      CLICKHOUSE_PASSWORD: ''
+    ports:
+      - "8123:8123"
+    networks:
+      - backend-network
+
+networks:
+  backend-network:
+    driver: bridge
