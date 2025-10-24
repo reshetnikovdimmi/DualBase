@@ -1,12 +1,13 @@
 package ru.reddmix.repositories;
 
 import ru.reddmix.DualBase.proto.DatabaseProtos;
+import ru.reddmix.interfaces.ClickHouseRepository;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ClickHouseRepositoryImpl {
+public class ClickHouseRepositoryImpl implements ClickHouseRepository {
     private final String url = "jdbc:clickhouse://localhost:8123/default";
     private final String user = "default";
     private final String pass = "";

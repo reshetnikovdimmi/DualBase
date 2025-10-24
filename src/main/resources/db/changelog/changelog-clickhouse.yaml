@@ -8,16 +8,16 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  type: BIGSERIAL PRIMARY KEY
+                  type: UInt64 PRIMARY KEY
               - column:
                   name: username
-                  type: VARCHAR(50)
+                  type: String
               - column:
                   name: balance
-                  type: DECIMAL(10,2)
+                  type: Decimal(10, 2)
               - column:
                   name: email
-                  type: VARCHAR(100)
+                  type: String
   - changeSet:
       id: create-games-tables
       author: admin
@@ -27,19 +27,19 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  type: BIGSERIAL PRIMARY KEY
+                  type: UInt64 PRIMARY KEY
               - column:
                   name: player_id
-                  type: BIGINT
+                  type: UInt64
                   constraints:
                     foreignKeyName: fk_games_user
                     references: users(id)
               - column:
                   name: game_date
-                  type: TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW()
+                  type: DateTime
               - column:
                   name: bet_amount
-                  type: DECIMAL(10,2)
+                  type: Decimal(10, 2)
               - column:
                   name: win_amount
-                  type: DECIMAL(10,2)
+                  type: Decimal(10, 2)
